@@ -1,5 +1,5 @@
 import React from 'react';
-import { CharacterIcon, InventoryIcon, AdventureIcon, SkillIcon, FormationIcon, ShoppingCartIcon, MapIcon, QuestIcon, CompanionIcon } from './IconComponents.tsx';
+import { CharacterIcon, InventoryIcon, AdventureIcon, SkillIcon, FormationIcon, ShoppingCartIcon, MapIcon, QuestIcon, CompanionIcon } from './IconComponents';
 
 interface BottomNavBarProps {
   activePanel: string;
