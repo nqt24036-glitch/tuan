@@ -60,7 +60,7 @@
   <!-- Thêm Babel Standalone để dịch TypeScript/TSX -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
-  <!-- FIX: Cleaned up import map to use a single, reliable ES Module CDN (esm.sh). -->
+  <!-- FIX: Cleaned up import map to use a single, reliable ES Module CDN (esm.sh) and removed conflicting entries. -->
   <script type="importmap">
 {
   "imports": {
@@ -75,8 +75,8 @@
 </head>
   <body>
     <div id="root"></div>
-    <!-- FIX: Added data-presets to explicitly tell Babel how to transpile TSX, making it more robust. -->
-    <script type="text/babel" data-presets="react,typescript" data-type="module" src="index.tsx"></script>
+    <!-- FIX: Changed src to index.js. GitHub serves .js with the correct MIME type, which Babel then transpiles. -->
+    <script type="text/babel" data-presets="react,typescript" data-type="module" src="index.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
