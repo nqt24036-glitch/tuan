@@ -1,8 +1,9 @@
 
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// FIX: Added .tsx extension to fix module resolution error.
-import App from './App.tsx';
+// FIX: Removed .tsx extension to prevent MIME type errors on static hosts.
+import App from './App';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

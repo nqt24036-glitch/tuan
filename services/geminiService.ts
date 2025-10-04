@@ -1,6 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { AdventureStorylet, WorldMapArea, Player, Quest } from '../types.ts';
-import { MONSTERS, ITEM_LIST } from '../data/gameData.ts';
+import { AdventureStorylet, WorldMapArea, Player, Quest } from '../types';
+import { MONSTERS, ITEM_LIST } from '../data/gameData';
 
 let ai: GoogleGenAI | null = null;
 

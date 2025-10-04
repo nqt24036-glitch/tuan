@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-// FIX: Added .ts extension to fix module resolution error.
-import { Player, PotentialStats, CombatStats, SpiritRoot, EquipmentSlot, Item } from '../types.ts';
-// FIX: Added .tsx extension to fix module resolution error.
-import CultivationPanel from './CultivationPanel.tsx';
-// FIX: Added .ts extension to fix module resolution error.
-import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS, COMBAT_STAT_LABELS } from '../constants.ts';
+// FIX: Removed .ts extension to prevent MIME type errors on static hosts.
+import { Player, PotentialStats, CombatStats, SpiritRoot, EquipmentSlot, Item } from '../types';
+// FIX: Removed .tsx extension to prevent MIME type errors on static hosts.
+import CultivationPanel from './CultivationPanel';
+// FIX: Removed .ts extension to prevent MIME type errors on static hosts.
+import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS, COMBAT_STAT_LABELS } from '../constants';
 
 // Props for the main panel
 interface CharacterPanelProps {

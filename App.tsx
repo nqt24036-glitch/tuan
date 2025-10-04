@@ -1,19 +1,19 @@
 // FIX: Replaced placeholder text with a fully functional main App component. This component manages game state, handles character creation, and orchestrates the different UI panels. Exporting the component resolves the "not a module" error.
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { Player, CharacterCreationData, Monster, TranPhap, Item, EquipmentSlot, PotentialStats, WorldMapArea, Quest, Companion, NPC, Skill, CultivationMethod } from './types.ts';
-import { MONSTERS, SKILLS, TRAN_PHAP_LIST, ITEM_LIST, COMPANION_LIST, NPC_LIST, CULTIVATION_METHODS_LIST } from './data/gameData.ts';
-import CharacterCreationScreen from './components/CharacterCreationScreen.tsx';
-import StatusBar from './components/StatusBar.tsx';
-import MainContentArea from './components/MainContentArea.tsx';
-import BottomNavBar from './components/BottomNavBar.tsx';
-import BattleScreen from './components/BattleScreen.tsx';
-import AreaDetailPanel from './components/AreaDetailPanel.tsx';
-import BlacksmithPanel from './components/BlacksmithPanel.tsx';
-import SettingsPanel from './components/SettingsPanel.tsx';
-import AddNewMonsterModal from './components/AddNewMonsterModal.tsx';
-import ActivityLogPanel from './components/ActivityLogPanel.tsx';
-import { initializeAi } from './services/geminiService.ts';
-import ApiKeyModal from './components/ApiKeyModal.tsx';
+import { Player, CharacterCreationData, Monster, TranPhap, Item, EquipmentSlot, PotentialStats, WorldMapArea, Quest, Companion, NPC, Skill, CultivationMethod } from './types';
+import { MONSTERS, SKILLS, TRAN_PHAP_LIST, ITEM_LIST, COMPANION_LIST, NPC_LIST, CULTIVATION_METHODS_LIST } from './data/gameData';
+import CharacterCreationScreen from './components/CharacterCreationScreen';
+import StatusBar from './components/StatusBar';
+import MainContentArea from './components/MainContentArea';
+import BottomNavBar from './components/BottomNavBar';
+import BattleScreen from './components/BattleScreen';
+import AreaDetailPanel from './components/AreaDetailPanel';
+import BlacksmithPanel from './components/BlacksmithPanel';
+import SettingsPanel from './components/SettingsPanel';
+import AddNewMonsterModal from './components/AddNewMonsterModal';
+import ActivityLogPanel from './components/ActivityLogPanel';
+import { initializeAi } from './services/geminiService';
+import ApiKeyModal from './components/ApiKeyModal';
 
 // Initial Player State
 const createInitialPlayer = (data: CharacterCreationData): Player => {

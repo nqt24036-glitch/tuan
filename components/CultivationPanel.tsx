@@ -1,7 +1,7 @@
 import React from 'react';
-import { Player } from '../types.ts';
-import { CULTIVATION_METHODS_LIST } from '../data/gameData.ts';
-import { COMBAT_STAT_LABELS } from '../constants.ts';
+import { Player } from '../types';
+import { CULTIVATION_METHODS_LIST } from '../data/gameData';
+import { COMBAT_STAT_LABELS } from '../constants';
 
 interface CultivationPanelProps {
   player: Player;

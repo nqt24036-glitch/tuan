@@ -1,6 +1,6 @@
 // FIX: Create full content for `constants.ts` to define constants.
-// FIX: Add .ts extension to import path.
-import { ItemRarity, CombatStats } from './types.ts';
+// FIX: Remove .ts extension from import path.
+import { ItemRarity, CombatStats } from './types';
 
 export const ITEM_RARITY_COLORS: Record<ItemRarity, string> = {
   'Phổ thông': 'border-gray-400',   // Trắng

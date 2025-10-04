@@ -1,9 +1,9 @@
 
 
 import React from 'react';
-// FIX: Added .ts extension to fix module resolution error.
-import { Player } from '../types.ts';
-import { LogIcon } from './IconComponents.tsx';
+// FIX: Removed .ts extension to prevent MIME type errors on static hosts.
+import { Player } from '../types';
+import { LogIcon } from './IconComponents';
 
 interface StatusBarProps {
   player: Player;

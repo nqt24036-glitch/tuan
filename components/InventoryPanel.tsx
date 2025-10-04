@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { Player, Item, ItemType, EquipmentSlot } from '../types.ts';
-import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
+import { Player, Item, ItemType, EquipmentSlot } from '../types';
+import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants';
 
 interface InventoryPanelProps {
   player: Player;

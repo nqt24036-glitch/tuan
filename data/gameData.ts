@@ -1,6 +1,6 @@
 // FIX: Create full content for `data/gameData.ts`, defining and exporting game data constants to resolve module errors across the application.
 // MODIFIED: Added new monster-specific skills and assigned them to various monsters for the enhanced combat AI.
-import { Item, Monster, TranPhap, Skill, NPC, Companion, CultivationMethod } from '../types.ts';
+import { Item, Monster, TranPhap, Skill, NPC, Companion, CultivationMethod } from '../types';
 
 export const CULTIVATION_METHODS_LIST: CultivationMethod[] = [
   {
