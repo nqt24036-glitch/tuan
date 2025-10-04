@@ -59,21 +59,24 @@
     </style>
   <!-- Thêm Babel Standalone để dịch TypeScript/TSX -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- FIX: Updated import map to use a reliable ES Module CDN (esm.sh) which serves compatible modules. This is the root cause of the black screen. -->
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.21.0"
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "@google/genai": "https://esm.sh/@google/genai",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
   }
 }
 </script>
 </head>
   <body>
     <div id="root"></div>
-    <!-- Thay đổi type để Babel có thể xử lý file .tsx -->
-    <script type="text/babel" data-type="module" src="index.tsx"></script>
+    <!-- FIX: Added data-presets to explicitly tell Babel how to transpile TSX, making it more robust. -->
+    <script type="text/babel" data-presets="react,typescript" data-type="module" src="index.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
