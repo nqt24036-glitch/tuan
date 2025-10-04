@@ -12,6 +12,8 @@ import BlacksmithPanel from './components/BlacksmithPanel.tsx';
 import SettingsPanel from './components/SettingsPanel.tsx';
 import AddNewMonsterModal from './components/AddNewMonsterModal.tsx';
 import ActivityLogPanel from './components/ActivityLogPanel.tsx';
+import { initializeAi } from './services/geminiService.ts';
+import ApiKeyModal from './components/ApiKeyModal.tsx';
 
 // Initial Player State
 const createInitialPlayer = (data: CharacterCreationData): Player => {
@@ -104,6 +106,8 @@ const App: React.FC = () => {
     const [activityLog, setActivityLog] = useState<string[]>([]);
     const [isLogVisible, setIsLogVisible] = useState(false);
     const [isBottomNavBarVisible, setIsBottomNavBarVisible] = useState<boolean>(() => JSON.parse(localStorage.getItem('isBottomNavBarVisible') ?? 'true'));
+    const [apiKey, setApiKey] = useState<string | null>(null);
+    const [isApiKeyModalNeeded, setIsApiKeyModalNeeded] = useState(false);
 
     
     // FIX: Replaced NodeJS.Timeout with ReturnType<typeof setInterval> for browser compatibility.
@@ -115,11 +119,22 @@ const App: React.FC = () => {
         setActivityLog(prev => [`${timestamp} ${message}`, ...prev].slice(0, 100)); // Keep max 100 entries
     }, []);
 
-    // Load initial data
+    // Load initial data and API Key
     useEffect(() => {
         const customMonstersRaw = localStorage.getItem('customMonsters');
         const customMonsters = customMonstersRaw ? JSON.parse(customMonstersRaw) : [];
         setMasterMonsterList([...MONSTERS, ...customMonsters]);
+
+        const keyFromStorage = localStorage.getItem('geminiApiKey');
+        if (keyFromStorage) {
+            initializeAi(keyFromStorage);
+            setApiKey(keyFromStorage);
+        } else {
+            const savedPlayer = localStorage.getItem('playerData');
+            if (!savedPlayer) {
+               setIsApiKeyModalNeeded(true);
+            }
+        }
     }, []);
 
     // Persist player data to localStorage
@@ -162,6 +177,16 @@ const App: React.FC = () => {
         setNotifications(prev => [...prev, message]);
         setTimeout(() => setNotifications(prev => prev.slice(1)), 3000);
     }, []);
+
+    const handleSaveApiKey = (key: string) => {
+        if (key) {
+            localStorage.setItem('geminiApiKey', key);
+            initializeAi(key);
+            setApiKey(key);
+            setIsApiKeyModalNeeded(false);
+            addNotification("Đã lưu API Key thành công!");
+        }
+    };
 
     // Companion stat calculation
     const calculateCompanionTotalStats = useCallback((c: Companion): Companion => {
@@ -1200,7 +1225,12 @@ const App: React.FC = () => {
     };
 
     if (!player) {
-        return <CharacterCreationScreen onCharacterCreate={handleCharacterCreate} />;
+        return (
+            <>
+                {isApiKeyModalNeeded && <ApiKeyModal onSave={handleSaveApiKey} />}
+                <CharacterCreationScreen onCharacterCreate={handleCharacterCreate} />
+            </>
+        );
     }
     
     const activeCompanion = player.companions.find(c => c.id === player.activeCompanionId) || null;
@@ -1218,11 +1248,11 @@ const App: React.FC = () => {
                     isMuted={isMuted} 
                     onToggleMute={() => setIsMuted(!isMuted)} 
                     onUpdatePlayerDetails={handleUpdatePlayerDetails} 
-                    onRedeemGiftcode={handleRedeemGiftcode} 
+                    onRedeemGiftcode={handleRedeemGiftcode}
+                    apiKey={apiKey}
+                    onSaveApiKey={handleSaveApiKey}
                     isAdmin={isAdmin} 
-                    // FIX: Changed `onAdminAddItem` to `handleAdminAddItem` to pass the correct function prop.
                     onAdminAddItem={handleAdminAddItem} 
-                    // FIX: Changed `onAdminLearnSkill` to `handleAdminLearnSkill` to pass the correct function prop.
                     onAdminLearnSkill={handleAdminLearnSkill} 
                     onAdminCreateItem={handleAdminCreateItem} 
                     onAdminCreateMonster={handleAdminCreateMonster} 
@@ -1256,11 +1286,12 @@ const App: React.FC = () => {
                             onAcceptQuest={handleAcceptQuest}
                             onNotify={addNotification}
                             onOpenBlacksmith={() => setIsBlacksmithOpen(true)}
-                            // FIX: Corrected a typo, passing `handleUpdateNpcDetails` to the `onUpdateNpcDetails` prop instead of the undefined `onUpdateNpcDetails`.
+                            apiKey={apiKey}
                             onUpdateNpcDetails={handleUpdateNpcDetails}
                         />
                     ) : (
                         <MainContentArea
+                            apiKey={apiKey}
                             activePanel={activePanel}
                             player={player}
                             isCultivating={isCultivating}

@@ -11,6 +11,7 @@ import QuestPanel from './QuestPanel.tsx';
 import CompanionPanel from './CompanionPanel.tsx';
 
 interface MainContentAreaProps {
+  apiKey: string | null;
   activePanel: string;
   player: Player;
   isCultivating: boolean;
@@ -42,7 +43,7 @@ interface MainContentAreaProps {
 }
 
 const MainContentArea: React.FC<MainContentAreaProps> = (props) => {
-  const { activePanel, player } = props;
+  const { activePanel, player, apiKey } = props;
 
   const renderContent = () => {
     switch (activePanel) {
@@ -63,7 +64,7 @@ const MainContentArea: React.FC<MainContentAreaProps> = (props) => {
       case 'inventory':
         return <InventoryPanel player={player} onItemUse={props.onItemUse} onEquip={props.onEquipItem} />;
       case 'adventure':
-        return <AdventurePanel onStartBattle={props.onStartBattle} onReceiveReward={props.onReceiveReward} />;
+        return <AdventurePanel onStartBattle={props.onStartBattle} onReceiveReward={props.onReceiveReward} apiKey={apiKey} />;
       case 'quest':
         return <QuestPanel quests={player.quests} />;
       case 'skills':

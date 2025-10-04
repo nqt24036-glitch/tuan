@@ -5,9 +5,10 @@ import { generateAdventureStorylet } from '../services/geminiService.ts';
 interface AdventurePanelProps {
   onStartBattle: (monsterName: string) => void;
   onReceiveReward: (reward: { exp?: number; linhThach?: number; itemId?: string }) => void;
+  apiKey: string | null;
 }
 
-const AdventurePanel: React.FC<AdventurePanelProps> = ({ onStartBattle, onReceiveReward }) => {
+const AdventurePanel: React.FC<AdventurePanelProps> = ({ onStartBattle, onReceiveReward, apiKey }) => {
   const [storylet, setStorylet] = useState<AdventureStorylet | null>(null);
   const [currentStep, setCurrentStep] = useState<AdventureStep | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -82,7 +83,14 @@ const AdventurePanel: React.FC<AdventurePanelProps> = ({ onStartBattle, onReceiv
       <h3 className="text-3xl font-serif text-yellow-300">Luyện Lịch</h3>
       <p className="text-gray-400 mt-2 mb-6">Khám phá thế giới, tìm kiếm cơ duyên và đối mặt với thử thách.</p>
 
-      {!storylet && !isLoading && (
+      {!apiKey && !isLoading && (
+        <div className="text-center p-6 bg-red-900/30 border border-red-700 rounded-lg max-w-2xl">
+            <h4 className="text-xl font-bold text-red-300">Tính năng AI chưa sẵn sàng</h4>
+            <p className="text-gray-400 mt-2">Vui lòng thiết lập Gemini API Key trong menu Cài đặt (icon avatar ở góc trên) để sử dụng Luyện Lịch.</p>
+        </div>
+      )}
+
+      {apiKey && !storylet && !isLoading && (
         <button
           onClick={startNewAdventure}
           className="px-8 py-4 text-xl font-bold rounded-lg border-2 transition-all duration-300 bg-blue-600 hover:bg-blue-500 border-blue-400 shadow-lg shadow-blue-500/20"

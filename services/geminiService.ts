@@ -2,7 +2,26 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { AdventureStorylet, WorldMapArea, Player, Quest } from '../types.ts';
 import { MONSTERS, ITEM_LIST } from '../data/gameData.ts';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+let ai: GoogleGenAI | null = null;
+
+export const initializeAi = (apiKey: string) => {
+    if (apiKey && apiKey.trim() !== '') {
+        try {
+            ai = new GoogleGenAI({ apiKey });
+        } catch (error) {
+            console.error("Failed to initialize GoogleGenAI:", error);
+            ai = null;
+        }
+    } else {
+        console.warn("AI initialization skipped: API key is missing.");
+        ai = null;
+    }
+};
+
+const getAi = (): GoogleGenAI | null => {
+    return ai;
+};
+
 
 const adventureSchema = {
   type: Type.OBJECT,
@@ -93,6 +112,12 @@ const questSchema = {
 
 
 export const generateAdventureStorylet = async (): Promise<AdventureStorylet | null> => {
+  const aiInstance = getAi();
+  if (!aiInstance) {
+    console.error("AI service not initialized. Cannot generate storylet.");
+    return null;
+  }
+
   const monsterNames = MONSTERS.map(m => m.name).join(', ');
   
   const prompt = `Tạo một mini game phiêu lưu dạng văn bản (text-based adventure) ngắn gọn trong bối cảnh thế giới tu tiên huyền huyễn của Trung Quốc.
@@ -110,7 +135,7 @@ export const generateAdventureStorylet = async (): Promise<AdventureStorylet | n
   8.  Đảm bảo tất cả 'nextStepId' cũng phải khớp với 'id' của một bước nào đó trong danh sách.`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await aiInstance.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
@@ -137,6 +162,12 @@ export const generateAdventureStorylet = async (): Promise<AdventureStorylet | n
 };
 
 export const generateQuest = async (npc: string, area: WorldMapArea, player: Player): Promise<Quest | null> => {
+  const aiInstance = getAi();
+  if (!aiInstance) {
+    console.error("AI service not initialized. Cannot generate quest.");
+    return null;
+  }
+    
   const availableMonsters = area.monsters?.filter(m => m !== 'Không có (thành an toàn)') || [];
   const monsterList = availableMonsters.length > 0 ? availableMonsters.join(', ') : 'không có yêu thú nào';
   
@@ -192,7 +223,7 @@ export const generateQuest = async (npc: string, area: WorldMapArea, player: Pla
           *   Ví dụ: Nếu \`reward\` là "150 EXP Tu Luyện, 75 Linh Thạch, 1x Da Sói", thì \`rewardObject\` phải là \`{ "cultivationExp": 150, "linhThach": 75, "itemId": "item_005" }\`.`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await aiInstance.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {

@@ -9,6 +9,8 @@ interface SettingsPanelProps {
     onToggleMute: () => void;
     onUpdatePlayerDetails: (details: { name?: string; hairStyle?: number; eyeColor?: 'Đen' | 'Trắng' }) => void;
     onRedeemGiftcode: (code: string) => void;
+    apiKey: string | null;
+    onSaveApiKey: (key: string) => void;
     isAdmin: boolean;
     onAdminAddItem: (item: Item) => void;
     onAdminLearnSkill: (skill: Skill) => void;
@@ -29,6 +31,8 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
     onToggleMute, 
     onUpdatePlayerDetails, 
     onRedeemGiftcode, 
+    apiKey,
+    onSaveApiKey,
     isAdmin, 
     onAdminAddItem, 
     onAdminLearnSkill, 
@@ -42,6 +46,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
     const [tempHairStyle, setTempHairStyle] = useState(player.hairStyle);
     const [tempEyeColor, setTempEyeColor] = useState(player.eyeColor);
     const [giftcode, setGiftcode] = useState('');
+    const [tempApiKey, setTempApiKey] = useState(apiKey || '');
     const [showAdminPanel, setShowAdminPanel] = useState(false);
 
     const avatarPreviewUrl = `https://api.multiavatar.com/${newName.trim() || player.gender}-${tempHairStyle}-${tempEyeColor}.png`;
@@ -52,6 +57,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
             hairStyle: tempHairStyle,
             eyeColor: tempEyeColor,
         });
+        onSaveApiKey(tempApiKey);
         onClose();
     };
 
@@ -71,7 +77,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     onAddItem={onAdminAddItem}
                     onLearnSkill={onAdminLearnSkill}
                     onCreateItem={onAdminCreateItem}
-                    // FIX: Corrected a typo in the prop name passed to AdminPanel. `onCreateMonster` should be `onAdminCreateMonster` to match the destructured prop from SettingsPanelProps.
                     onCreateMonster={onAdminCreateMonster}
                     masterItemList={masterItemList}
                 />
@@ -98,6 +103,21 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
                                 <button onClick={onToggleBottomNavBar} className={`px-4 py-2 rounded-md font-bold transition-colors ${!isBottomNavBarVisible ? 'bg-red-600' : 'bg-green-600'}`}>
                                     {!isBottomNavBarVisible ? 'Đang Ẩn' : 'Đang Hiện'}
                                 </button>
+                            </div>
+                        </div>
+
+                        {/* API Key */}
+                        <div className="bg-gray-800/50 p-4 rounded-lg">
+                            <h3 className="text-lg font-bold text-yellow-300 border-b border-gray-700 pb-2 mb-3">Gemini API Key</h3>
+                            <p className="text-xs text-gray-400 mb-2">Cần thiết cho các tính năng AI (Luyện Lịch, Nhiệm Vụ). Lấy key tại Google AI Studio.</p>
+                            <div className="flex gap-2">
+                                <input
+                                    type="password"
+                                    value={tempApiKey}
+                                    onChange={e => setTempApiKey(e.target.value)}
+                                    placeholder="Chưa thiết lập API Key"
+                                    className="flex-grow bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                />
                             </div>
                         </div>
 
@@ -169,7 +189,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
 
                     <footer className="p-4 border-t border-gray-700 text-right">
                         <button onClick={handleSaveChanges} className="px-6 py-2 bg-green-600 hover:bg-green-500 rounded font-semibold transition-colors">
-                            Lưu Thay Đổi
+                            Lưu Tất Cả
                         </button>
                     </footer>
                 </div>

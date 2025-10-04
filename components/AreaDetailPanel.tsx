@@ -13,12 +13,13 @@ interface AreaDetailPanelProps {
   onAcceptQuest: (quest: Quest) => void;
   onNotify: (message: string) => void;
   onOpenBlacksmith: () => void;
+  apiKey: string | null;
   masterMonsterList: Monster[];
   npcList: NPC[];
   onUpdateNpcDetails: (npcId: string, details: { hairStyle?: number; eyeColor?: 'Đen' | 'Trắng' }) => void;
 }
 
-const AreaDetailPanel: React.FC<AreaDetailPanelProps> = ({ area, player, onLeaveArea, onStartBattle, onAcceptQuest, onNotify, onOpenBlacksmith, masterMonsterList, npcList, onUpdateNpcDetails }) => {
+const AreaDetailPanel: React.FC<AreaDetailPanelProps> = ({ area, player, onLeaveArea, onStartBattle, onAcceptQuest, onNotify, onOpenBlacksmith, apiKey, masterMonsterList, npcList, onUpdateNpcDetails }) => {
   const [isLoadingQuest, setIsLoadingQuest] = useState(false);
   const [generatedQuest, setGeneratedQuest] = useState<Quest | null>(null);
   const [selectedNpc, setSelectedNpc] = useState<NPC | null>(null);
@@ -38,6 +39,13 @@ const AreaDetailPanel: React.FC<AreaDetailPanelProps> = ({ area, player, onLeave
     }
 
     setSelectedNpc(npcData);
+
+    if (!apiKey) {
+      setIsLoadingQuest(false);
+      setGeneratedQuest(null);
+      return;
+    }
+
     setIsLoadingQuest(true);
     setGeneratedQuest(null);
     try {
@@ -123,6 +131,9 @@ const AreaDetailPanel: React.FC<AreaDetailPanelProps> = ({ area, player, onLeave
             ) : (
                  <div>
                     <p className="text-lg text-white">"{selectedNpc.name} không có gì để nói với bạn lúc này."</p>
+                    {!apiKey && (
+                        <p className="text-sm text-yellow-400 mt-4">Lưu ý: Tính năng tạo nhiệm vụ động yêu cầu Gemini API Key. Vui lòng thiết lập trong Cài đặt.</p>
+                    )}
                     <div className="flex justify-end gap-4 mt-6">
                         <button onClick={handleDeclineQuest} className="px-6 py-2 bg-gray-600 hover:bg-gray-500 rounded">Rời đi</button>
                     </div>
