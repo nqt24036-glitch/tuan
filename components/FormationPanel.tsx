@@ -1,8 +1,8 @@
 import React from 'react';
-// FIX: Changed to a regular import for consistency. This resolves the module error for types.ts by ensuring it's treated as a module.
-import { Player, TranPhap } from '../types.ts';
-// FIX: Added .ts extension to fix module resolution error. This is resolved by creating data/gameData.ts as a module.
-import { TRAN_PHAP_LIST } from '../data/gameData.ts';
+// FIX: Removed .ts extension to prevent MIME type errors on static hosts.
+import { Player, TranPhap } from '../types';
+// FIX: Removed .ts extension to prevent MIME type errors on static hosts.
+import { TRAN_PHAP_LIST } from '../data/gameData';
 
 interface FormationPanelProps {
   player: Player;

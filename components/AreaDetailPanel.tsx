@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-// FIX: Added EquipmentSlot to imports for type-safe iteration.
-import { WorldMapArea, Player, Quest, NPC, EquipmentSlot, Monster } from '../types.ts';
-import { generateQuest } from '../services/geminiService.ts';
-import { ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
-import NpcDetailModal from './NpcDetailModal.tsx';
+import { WorldMapArea, Player, Quest, NPC, EquipmentSlot, Monster } from '../types';
+import { generateQuest } from '../services/geminiService';
+import { ITEM_RARITY_TEXT_COLORS } from '../constants';
+import NpcDetailModal from './NpcDetailModal';
 
 interface AreaDetailPanelProps {
   area: WorldMapArea;
@@ -100,7 +99,6 @@ const AreaDetailPanel: React.FC<AreaDetailPanelProps> = ({ area, player, onLeave
                   <div className="mb-4">
                     <h4 className="font-semibold text-sm text-gray-400">Trang bị:</h4>
                     <div className="flex flex-wrap gap-2 mt-1">
-                      {/* FIX: Replaced Object.entries with a more type-safe Object.keys iteration to correctly infer the 'item' type and resolve property access errors. */}
                       {(Object.keys(selectedNpc.equippedItems) as EquipmentSlot[]).map(slot => {
                         const item = selectedNpc.equippedItems[slot];
                         return (

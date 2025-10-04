@@ -1,4 +1,4 @@
-import { WorldMapRealm } from '../types.ts';
+import { WorldMapRealm } from '../types';
 
 export const WORLD_MAP_DATA: WorldMapRealm[] = [
   {

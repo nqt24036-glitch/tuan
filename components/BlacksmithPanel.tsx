@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { Player, Item } from '../types.ts';
-import { BLACKSMITH_INVENTORY, CRAFTING_RECIPES } from '../data/gameData.ts';
-import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
+import { Player, Item } from '../types';
+import { BLACKSMITH_INVENTORY, CRAFTING_RECIPES } from '../data/gameData';
+import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants';
 
 interface BlacksmithPanelProps {
   player: Player;

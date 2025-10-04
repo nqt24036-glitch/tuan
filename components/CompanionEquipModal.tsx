@@ -1,6 +1,6 @@
 import React from 'react';
-import { Item, EquipmentSlot } from '../types.ts';
-import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
+import { Item, EquipmentSlot } from '../types';
+import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants';
 
 interface CompanionEquipModalProps {
     playerInventory: Item[];

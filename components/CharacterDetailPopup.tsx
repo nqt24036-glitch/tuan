@@ -1,7 +1,7 @@
 import React from 'react';
-import { Player, Companion, Monster, CombatStats, Skill, EquipmentSlot } from '../types.ts';
-import { COMBAT_STAT_LABELS, ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
-import { SparklesIcon } from './IconComponents.tsx';
+import { Player, Companion, Monster, CombatStats, Skill, EquipmentSlot } from '../types';
+import { COMBAT_STAT_LABELS, ITEM_RARITY_TEXT_COLORS } from '../constants';
+import { SparklesIcon } from './IconComponents';
 
 interface CharacterDetailPopupProps {
   character: Player | Companion | Monster;

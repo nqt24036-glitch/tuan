@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Player, WorldMapArea } from '../types.ts';
-import { WORLD_MAP_DATA } from '../data/worldMapData.ts';
+import { Player, WorldMapArea } from '../types';
+import { WORLD_MAP_DATA } from '../data/worldMapData';
 
 interface WorldMapPanelProps {
   player: Player;

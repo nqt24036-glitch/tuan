@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { Player, Monster, CombatStats, CombatLogEntry, Skill, Companion, Item } from '../types.ts';
-import { AutoIcon, SparklesIcon, SwordIcon } from './IconComponents.tsx';
-import { playSound } from '../utils/audio.ts';
-import CombatEffect from './CombatEffect.tsx';
-import CharacterDetailPopup from './CharacterDetailPopup.tsx';
+import { Player, Monster, CombatStats, CombatLogEntry, Skill, Companion, Item } from '../types';
+import { AutoIcon, SparklesIcon, SwordIcon } from './IconComponents';
+import { playSound } from '../utils/audio';
+import CombatEffect from './CombatEffect';
+import CharacterDetailPopup from './CharacterDetailPopup';
 
 interface BattleScreenProps {
   player: Player;

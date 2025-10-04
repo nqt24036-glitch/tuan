@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Skill } from '../types.ts';
-import { SparklesIcon, SwordIcon, ShieldIcon, CultivationIcon } from './IconComponents.tsx';
+import { Skill } from '../types';
+import { SparklesIcon, SwordIcon, ShieldIcon, CultivationIcon } from './IconComponents';
 
 // Configuration for displaying all possible passive stat bonuses
 const STAT_DISPLAY_CONFIG = {

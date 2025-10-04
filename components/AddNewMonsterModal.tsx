@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Monster } from '../types.ts';
+import { Monster } from '../types';
 
 interface AddNewMonsterModalProps {
   promptData: {

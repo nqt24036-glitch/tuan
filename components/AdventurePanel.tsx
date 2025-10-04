@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { AdventureStorylet, AdventureStep, AdventureChoice } from '../types.ts';
-import { generateAdventureStorylet } from '../services/geminiService.ts';
+import { AdventureStorylet, AdventureStep, AdventureChoice } from '../types';
+import { generateAdventureStorylet } from '../services/geminiService';
 
 interface AdventurePanelProps {
   onStartBattle: (monsterName: string) => void;

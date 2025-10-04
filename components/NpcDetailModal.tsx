@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { NPC, CombatStats, EquipmentSlot } from '../types.ts';
-import { COMBAT_STAT_LABELS, ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
+import { NPC, CombatStats, EquipmentSlot } from '../types';
+import { COMBAT_STAT_LABELS, ITEM_RARITY_TEXT_COLORS } from '../constants';
 
 interface NpcDetailModalProps {
   npc: NPC;

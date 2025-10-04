@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Player, Item, Skill, Monster } from '../types.ts';
-import AdminPanel from './AdminPanel.tsx';
+import { Player, Item, Skill, Monster } from '../types';
+import AdminPanel from './AdminPanel';
 
 interface SettingsPanelProps {
     player: Player;

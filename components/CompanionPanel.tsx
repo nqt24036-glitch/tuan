@@ -1,9 +1,10 @@
 
+
 import React, { useState, useEffect } from 'react';
-import { Player, Companion, CombatStats, Skill, EquipmentSlot, Item } from '../types.ts';
-import { COMBAT_STAT_LABELS, ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
-import { SparklesIcon } from './IconComponents.tsx';
-import CompanionEquipModal from './CompanionEquipModal.tsx';
+import { Player, Companion, CombatStats, Skill, EquipmentSlot, Item } from '../types';
+import { COMBAT_STAT_LABELS, ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants';
+import { SparklesIcon } from './IconComponents';
+import CompanionEquipModal from './CompanionEquipModal';
 
 interface CompanionPanelProps {
   player: Player;

@@ -1,8 +1,8 @@
 
 
 import React, { useState } from 'react';
-// FIX: Added .ts extension to fix module resolution error.
-import { CharacterCreationData } from '../types.ts';
+// FIX: Removed .ts extension to fix module resolution error.
+import { CharacterCreationData } from '../types';
 
 interface Props {
   onCharacterCreate: (data: CharacterCreationData) => void;

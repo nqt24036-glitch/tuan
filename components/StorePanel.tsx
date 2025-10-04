@@ -1,7 +1,7 @@
 import React from 'react';
-import { Player, Item } from '../types.ts';
-import { STORE_INVENTORY } from '../data/gameData.ts';
-import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants.ts';
+import { Player, Item } from '../types';
+import { STORE_INVENTORY } from '../data/gameData';
+import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS } from '../constants';
 
 interface StorePanelProps {
   player: Player;

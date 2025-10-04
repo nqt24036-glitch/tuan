@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Item, Skill, ItemRarity, ItemType, EquipmentSlot, CombatStats, Monster } from '../types.ts';
-import { SKILLS } from '../data/gameData.ts';
-import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS, COMBAT_STAT_LABELS } from '../constants.ts';
-import { SparklesIcon } from './IconComponents.tsx';
+import { Item, Skill, ItemRarity, ItemType, EquipmentSlot, CombatStats, Monster } from '../types';
+import { SKILLS } from '../data/gameData';
+import { ITEM_RARITY_COLORS, ITEM_RARITY_TEXT_COLORS, COMBAT_STAT_LABELS } from '../constants';
+import { SparklesIcon } from './IconComponents';
 
 interface AdminPanelProps {
     onClose: () => void;
