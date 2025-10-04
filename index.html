@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Huyền Giới Tu Tiên</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0a0a0a">
+    <style>
+      body {
+        background-color: #0a0a0a;
+        background-image: radial-gradient(circle at top right, rgba(121, 6, 121, 0.2), transparent 40%),
+                          radial-gradient(circle at bottom left, rgba(6, 6, 121, 0.2), transparent 50%);
+        color: #e0e0e0;
+      }
+      @keyframes hit-effect {
+        0% { transform: scale(1) translateX(0); filter: brightness(1); }
+        25% { transform: scale(1.05) translateX(-5px); filter: brightness(1.75) drop-shadow(0 0 8px #ff4444); }
+        50% { transform: translateX(5px); }
+        100% { transform: scale(1) translateX(0); filter: brightness(1); }
+      }
+      .animate-hit {
+        animation: hit-effect 0.3s ease-in-out;
+      }
+
+      /* Visual Skill Effects */
+      @keyframes slash-effect {
+        0% { transform: translateX(-50%) translateY(-50%) rotate(-60deg) scaleX(0); opacity: 0.5; }
+        50% { transform: translateX(-50%) translateY(-50%) rotate(-30deg) scaleX(1); opacity: 1; }
+        100% { transform: translateX(-50%) translateY(-50%) rotate(0deg) scaleX(0); opacity: 0; }
+      }
+      .animate-slash {
+        animation: slash-effect 0.3s ease-in-out forwards;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: absolute;
+        border: 4px solid transparent;
+        border-top-color: white;
+        box-shadow: 0 0 15px white, 0 0 8px cyan inset;
+        filter: blur(1px);
+      }
+
+      @keyframes heal-particle-effect {
+        0% { transform: translateY(0) scale(1.2); opacity: 1; }
+        100% { transform: translateY(-100px) scale(0); opacity: 0; }
+      }
+      .animate-heal-particle {
+        animation: heal-particle-effect 1.2s ease-out forwards;
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background-color: #4ade80; /* green-400 */
+        border-radius: 50%;
+        box-shadow: 0 0 10px #4ade80, 0 0 5px white;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.21.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
